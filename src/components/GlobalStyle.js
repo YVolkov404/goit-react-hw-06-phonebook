@@ -39,10 +39,4 @@ export const GlobalStyle = createGlobalStyle`
       padding: 0;
     }
 
-    ${
-      '' /* :focus {
-      outline: 0;
-    } */
-    }
-
 `;
