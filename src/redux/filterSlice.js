@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { contactsState } from './contactsSlice';
+import { contactsState } from '../../src/redux/contactsSlice';
 
 const filterState = '';
 
