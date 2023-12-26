@@ -15,7 +15,7 @@ export const Filter = () => {
         id="filterId"
         type="text"
         name="name"
-        value={dispatch(getFilteredContacts(filter))}
+        value={() => dispatch(getFilteredContacts(filter))}
         onChange={setContactName}
         autoComplete="off"
       />
