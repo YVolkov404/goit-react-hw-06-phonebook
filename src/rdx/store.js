@@ -5,6 +5,7 @@ import {
   REHYDRATE,
   PAUSE,
   PURGE,
+  PERSIST,
   REGISTER,
   persistStore,
   persistReducer,
@@ -14,6 +15,10 @@ import {
 
 import { contactsReducer } from './contactsSlice';
 import { filterReducer } from './filterSlice';
+import devToolsEnhancer from 'remote-redux-devtools';
+import Symbol_observable from 'symbol-observable';
+
+console.log(Symbol_observable);
 
 //-----------------------------------------------------------------------------
 
@@ -25,7 +30,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'contact-list',
   storage,
-  blacklist: [''],
+  whitelist: ['contacts'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -35,8 +40,17 @@ export const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PURGE, REGISTER],
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PURGE, PERSIST, REGISTER],
       },
+    }),
+
+  enhancers: getDefaultEnhancers =>
+    getDefaultEnhancers({
+      enhancers: devToolsEnhancer({
+        realtime: true,
+        name: 'goit-react-hw-04-phonebook',
+        port: 3000,
+      }),
     }),
 });
 

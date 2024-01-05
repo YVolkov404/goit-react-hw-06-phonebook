@@ -5,7 +5,7 @@ import { GlobalStyle } from './components/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './redux/store';
+import { store, persistor } from 'rdx/store';
 
 /** Theme : color guide
   ---> main color : background;

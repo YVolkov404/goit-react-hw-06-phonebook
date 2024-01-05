@@ -1,4 +1,4 @@
-import { Form as TagForm, Field, ErrorMessage } from 'formik';
+import { Form as TagForm, Field } from 'formik';
 import styled from 'styled-components';
 
 export const Form = styled(TagForm)`
@@ -29,7 +29,7 @@ export const Input = styled(Field)`
   }
 `;
 
-export const ErrorMsg1 = styled(ErrorMessage)`
+export const ErrorMsg1 = styled.div`
   position: absolute;
   right: 0;
   top: 10px;
@@ -41,7 +41,7 @@ export const ErrorMsg1 = styled(ErrorMessage)`
   text-decoration-color: ${p => p.theme.third};
 `;
 
-export const ErrorMsg2 = styled(ErrorMessage)`
+export const ErrorMsg2 = styled.div`
   position: absolute;
   right: 0;
   top: 97px;

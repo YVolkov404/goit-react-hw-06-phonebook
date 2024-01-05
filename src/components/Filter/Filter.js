@@ -1,12 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Search, Label, Input } from './Filter.styled';
-import { getFilteredContacts, setFilteredName } from '../../redux/filterSlice';
+import { getSearchQuery, filterState } from 'rdx/filterSlice';
 
 export const Filter = () => {
-  const filter = useSelector(state => state.filterState);
+  const filter = useSelector(filterState);
+
+  // console.log(filter);
+
   const dispatch = useDispatch();
 
-  const setContactName = e => dispatch(setFilteredName(e.target.value));
+  const onChangeHandler = e => {
+    dispatch(getSearchQuery(e.target.value));
+  };
+
+  // console.log(onChangeHandler);
 
   return (
     <Search>
@@ -15,9 +22,8 @@ export const Filter = () => {
         id="filterId"
         type="text"
         name="name"
-        value={() => dispatch(getFilteredContacts(filter))}
-        onChange={setContactName}
-        autoComplete="off"
+        value={filter}
+        onChange={onChangeHandler}
       />
     </Search>
   );
