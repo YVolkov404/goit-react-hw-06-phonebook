@@ -1,7 +1,6 @@
 import { Formik, useFormik } from 'formik';
 // import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
-import { addContacts, contactsState } from 'rdx/contactsSlice';
+
 import {
   Form,
   Label,
@@ -10,6 +9,9 @@ import {
   ErrorMsg2,
   SubmitBtn,
 } from './ContactForm.styled';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { addContacts, contactsState } from 'rdx/contactsSlice';
 
 //-------------------------------------------------------------
 
@@ -30,11 +32,22 @@ const validate = values => {
 
   return errors;
 };
+
 //-------------------------------------------------------------
 
 export const ContactForm = () => {
-  const contacts = useSelector(contactsState);
   const dispatch = useDispatch();
+  const contacts = useSelector(contactsState);
+
+  const submitHandler = values => {
+    const hasContactName = contacts.some(
+      contact => contact.name.toLowerCase() === values.name.toLowerCase()
+    );
+    hasContactName
+      ? alert(`${values.name} already in phonebook!`)
+      : dispatch(addContacts(values.name, values.number));
+  };
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -43,22 +56,13 @@ export const ContactForm = () => {
     validate,
     onSubmit: (values, actions) => {
       actions.resetForm();
-
-      console.log(formik.handleSubmit(values));
+      submitHandler(values);
     },
-    handleSubmit: values => {
-      const { name, number } = values;
-
-      const hasContactName = contacts.some(contact => {
-        return contact.name.toLowerCase() === name.toLowerCase();
-      });
-
-      return hasContactName
-        ? alert(`${name} is already in contacts`)
-        : dispatch(addContacts(name, number));
-    },
+    handleSubmit: actions =>
+      actions.resetForm(values => {
+        values = { name: '', number: '' };
+      }),
   });
-
   return (
     <Formik>
       <Form autoComplete="off" onSubmit={formik.handleSubmit}>

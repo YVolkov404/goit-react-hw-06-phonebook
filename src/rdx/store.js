@@ -15,10 +15,10 @@ import {
 
 import { contactsReducer } from './contactsSlice';
 import { filterReducer } from './filterSlice';
-import devToolsEnhancer from 'remote-redux-devtools';
-import Symbol_observable from 'symbol-observable';
+// import devToolsEnhancer from 'remote-redux-devtools';
+// import Symbol_observable from 'symbol-observable';
 
-console.log(Symbol_observable);
+// console.log(Symbol_observable);
 
 //-----------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ const rootReducer = combineReducers({
 });
 
 const persistConfig = {
-  key: 'contact-list',
+  key: 'root',
   storage,
   whitelist: ['contacts'],
 };
@@ -44,14 +44,14 @@ export const store = configureStore({
       },
     }),
 
-  enhancers: getDefaultEnhancers =>
-    getDefaultEnhancers({
-      enhancers: devToolsEnhancer({
-        realtime: true,
-        name: 'goit-react-hw-04-phonebook',
-        port: 3000,
-      }),
-    }),
+  // enhancers: getDefaultEnhancers =>
+  //   getDefaultEnhancers({
+  //     enhancers: devToolsEnhancer({
+  //       realtime: true,
+  //       name: 'goit-react-hw-04-phonebook',
+  //       port: 3000,
+  //     }),
+  //   }),
 });
 
 export const persistor = persistStore(store);

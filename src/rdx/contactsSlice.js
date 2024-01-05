@@ -3,7 +3,7 @@ import { uid } from 'uid';
 
 export const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: { contacts: [] },
+  initialState: [],
   reducers: {
     addContacts: {
       prepare(name, number) {
@@ -15,13 +15,13 @@ export const contactsSlice = createSlice({
           },
         };
       },
-      reducer(state, action) {
-        state.contacts = action.payload;
+      reducer(contacts, action) {
+        contacts.push(action.payload);
       },
     },
     deleteContacts: {
-      reducer(state, action) {
-        return state.contacts.filter(contact => contact.id === action.payload);
+      reducer(contacts, action) {
+        return contacts.filter(contact => contact.id === action.payload);
       },
     },
   },

@@ -10,12 +10,14 @@ export const ContactList = () => {
 
   console.log(contacts);
 
-  const searchResponse = contacts.filter(contact => {
-    const hasContactName = contact.name
-      .toLowerCase()
-      .includes(filter.toLowerCase());
-    return hasContactName;
-  });
+  const searchResponse = () =>
+    contacts.filter(contact => {
+      console.log(contacts);
+      const hasContactName = contact.name
+        .toLowerCase()
+        .includes(filter.toLowerCase());
+      return hasContactName;
+    });
 
   if (!searchResponse.length) return null;
 
