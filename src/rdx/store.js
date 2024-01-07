@@ -1,4 +1,7 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { contactsReducer } from './contactsSlice';
+import { filterReducer } from './filterSlice';
+
 import storage from 'redux-persist/lib/storage';
 import {
   FLUSH,
@@ -13,22 +16,13 @@ import {
 
 //-----------------------------------------------------------------------------
 
-import { contactsReducer } from './contactsSlice';
-import { filterReducer } from './filterSlice';
-// import devToolsEnhancer from 'remote-redux-devtools';
-// import Symbol_observable from 'symbol-observable';
-
-// console.log(Symbol_observable);
-
-//-----------------------------------------------------------------------------
-
 const rootReducer = combineReducers({
   contacts: contactsReducer,
   filter: filterReducer,
 });
 
 const persistConfig = {
-  key: 'root',
+  key: 'contact-list',
   storage,
   whitelist: ['contacts'],
 };
@@ -43,15 +37,6 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PURGE, PERSIST, REGISTER],
       },
     }),
-
-  // enhancers: getDefaultEnhancers =>
-  //   getDefaultEnhancers({
-  //     enhancers: devToolsEnhancer({
-  //       realtime: true,
-  //       name: 'goit-react-hw-04-phonebook',
-  //       port: 3000,
-  //     }),
-  //   }),
 });
 
 export const persistor = persistStore(store);

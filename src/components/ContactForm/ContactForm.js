@@ -1,5 +1,8 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { addContacts, contactsState } from 'rdx/contactsSlice';
 import { Formik, useFormik } from 'formik';
-// import * as Yup from 'yup';
+
+//-------------------------------------------------------------
 
 import {
   Form,
@@ -10,9 +13,6 @@ import {
   SubmitBtn,
 } from './ContactForm.styled';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { addContacts, contactsState } from 'rdx/contactsSlice';
-
 //-------------------------------------------------------------
 
 const validate = values => {
@@ -22,12 +22,16 @@ const validate = values => {
     errors.name = 'Required';
   } else if (values.name.length < 3) {
     errors.name = 'Must be 3 characters or more';
+  } else if (values.name.length > 17) {
+    errors.name = 'Must be 16 characters or less';
   }
 
   if (!values.number) {
     errors.number = 'Required';
   } else if (values.number.length < 9) {
     errors.number = 'Must be 9 characters or more';
+  } else if (values.name.length > 12) {
+    errors.name = 'Must be 13 characters or less';
   }
 
   return errors;

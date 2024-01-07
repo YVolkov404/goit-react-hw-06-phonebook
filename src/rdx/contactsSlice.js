@@ -9,9 +9,9 @@ export const contactsSlice = createSlice({
       prepare(name, number) {
         return {
           payload: {
+            id: uid(3),
             name,
             number,
-            id: uid(3),
           },
         };
       },

@@ -39,4 +39,8 @@ export const GlobalStyle = createGlobalStyle`
       padding: 0;
     }
 
+    li {
+      list-style: none;
+    }
+
 `;

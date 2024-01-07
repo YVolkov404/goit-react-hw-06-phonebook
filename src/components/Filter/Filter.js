@@ -4,14 +4,9 @@ import { getSearchQuery, filterState } from 'rdx/filterSlice';
 
 export const Filter = () => {
   const filter = useSelector(filterState);
-
   const dispatch = useDispatch();
 
-  // const onChangeHandler = e => {
-  //   dispatch(getSearchQuery(e.target.value));
-  // };
-
-  // console.log(onChangeHandler);
+  const onChangeHandler = e => dispatch(getSearchQuery(e.target.value));
 
   return (
     <Search>
@@ -21,7 +16,7 @@ export const Filter = () => {
         type="text"
         name="name"
         value={filter}
-        onChange={e => dispatch(getSearchQuery(e.target.value))}
+        onChange={onChangeHandler}
       />
     </Search>
   );

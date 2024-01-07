@@ -1,37 +1,48 @@
-import { useSelector } from 'react-redux';
-import { ListItem } from '../ListItem/ListItem';
-import { List } from './ContactList.styled';
-import { contactsState } from 'rdx/contactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { contactsState, deleteContacts } from 'rdx/contactsSlice';
 import { filterState } from 'rdx/filterSlice';
 
+//---------------------------------------------------------------
+
+import {
+  List,
+  ListItem,
+  Name,
+  Number,
+  DeleteBtn,
+  Icon,
+  Item,
+} from './ContactList.styled';
+
+//----------------------------------------------------------------
+
 export const ContactList = () => {
+  const dispatch = useDispatch();
   const contacts = useSelector(contactsState);
   const filter = useSelector(filterState);
 
-  console.log(contacts);
-
-  const searchResponse = () =>
-    contacts.filter(contact => {
-      console.log(contacts);
-      const hasContactName = contact.name
-        .toLowerCase()
-        .includes(filter.toLowerCase());
-      return hasContactName;
-    });
-
-  if (!searchResponse.length) return null;
+  const searchResponse = contacts.filter(contact => {
+    return contact.name.toLowerCase().includes(filter.toLowerCase());
+  });
 
   return (
     <List>
-      {searchResponse.map(contact => {
-        return (
-          <ListItem
-            key={contact.id}
-            name={contact.name}
-            number={contact.number}
-          />
-        );
-      })}
+      {searchResponse.length > 0 &&
+        searchResponse.map(response => {
+          return (
+            <ListItem key={response.id}>
+              <Item>
+                <Name>{response.name} :</Name>
+                <Number>{response.number}</Number>
+                <DeleteBtn
+                  onClick={() => dispatch(deleteContacts(response.id))}
+                >
+                  <Icon size="19px" />
+                </DeleteBtn>
+              </Item>
+            </ListItem>
+          );
+        })}
     </List>
   );
 };
