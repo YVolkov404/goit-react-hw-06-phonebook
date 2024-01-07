@@ -8,19 +8,16 @@ export const List = styled.ul`
   padding: 15px 5px;
 `;
 
-export const ListItem = styled.li`
-  margin-bottom: 12px;
-  &:last-child {
-    margin-bottom: 0;
-  }
-`;
-
 export const Item = styled.li`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-content: center;
   align-items: center;
+  margin-bottom: 12px;
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 export const Name = styled.span`
@@ -32,10 +29,6 @@ export const Name = styled.span`
 export const Number = styled.span`
   font-size: 17px;
   color: ${p => p.theme.third};
-  text-decoration-line: underline;
-  text-decoration-style: dotted;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 5px;
   margin-right: 10px;
 `;
 

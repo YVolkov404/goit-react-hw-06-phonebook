@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Search, Label, Input } from './Filter.styled';
 import { getSearchQuery, filterState } from 'rdx/filterSlice';
-
+//---------------------------------------------------------------------
+import { Search, Label, Input } from './Filter.styled';
+//---------------------------------------------------------------------
 export const Filter = () => {
   const filter = useSelector(filterState);
   const dispatch = useDispatch();
@@ -14,7 +15,6 @@ export const Filter = () => {
       <Input
         id="filterId"
         type="text"
-        name="name"
         value={filter}
         onChange={onChangeHandler}
       />

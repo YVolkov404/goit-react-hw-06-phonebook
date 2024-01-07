@@ -1,9 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addContacts, contactsState } from 'rdx/contactsSlice';
 import { Formik, useFormik } from 'formik';
-
 //-------------------------------------------------------------
-
 import {
   Form,
   Label,
@@ -12,9 +10,7 @@ import {
   ErrorMsg2,
   SubmitBtn,
 } from './ContactForm.styled';
-
-//-------------------------------------------------------------
-
+//--------------------------------------------------------------
 const validate = values => {
   const errors = {};
 
@@ -30,15 +26,13 @@ const validate = values => {
     errors.number = 'Required';
   } else if (values.number.length < 9) {
     errors.number = 'Must be 9 characters or more';
-  } else if (values.name.length > 12) {
-    errors.name = 'Must be 13 characters or less';
+  } else if (values.number.length > 12) {
+    errors.number = 'Must be 13 characters or less';
   }
 
   return errors;
 };
-
 //-------------------------------------------------------------
-
 export const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(contactsState);
@@ -47,7 +41,7 @@ export const ContactForm = () => {
     const hasContactName = contacts.some(
       contact => contact.name.toLowerCase() === values.name.toLowerCase()
     );
-    hasContactName
+    return hasContactName
       ? alert(`${values.name} already in phonebook!`)
       : dispatch(addContacts(values.name, values.number));
   };
@@ -62,11 +56,8 @@ export const ContactForm = () => {
       actions.resetForm();
       submitHandler(values);
     },
-    handleSubmit: actions =>
-      actions.resetForm(values => {
-        values = { name: '', number: '' };
-      }),
   });
+
   return (
     <Formik>
       <Form autoComplete="off" onSubmit={formik.handleSubmit}>
@@ -76,7 +67,6 @@ export const ContactForm = () => {
           type="text"
           name="name"
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           value={formik.values.name}
         />
 
@@ -90,7 +80,6 @@ export const ContactForm = () => {
           type="tel"
           name="number"
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           value={formik.values.number}
         />
 

@@ -1,21 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { contactsState, deleteContacts } from 'rdx/contactsSlice';
 import { filterState } from 'rdx/filterSlice';
-
 //---------------------------------------------------------------
-
 import {
   List,
-  ListItem,
   Name,
   Number,
   DeleteBtn,
   Icon,
   Item,
 } from './ContactList.styled';
-
 //----------------------------------------------------------------
-
 export const ContactList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(contactsState);
@@ -26,23 +21,20 @@ export const ContactList = () => {
   });
 
   return (
-    <List>
-      {searchResponse.length > 0 &&
-        searchResponse.map(response => {
+    searchResponse.length > 0 && (
+      <List>
+        {searchResponse.map(({ id, name, number }) => {
           return (
-            <ListItem key={response.id}>
-              <Item>
-                <Name>{response.name} :</Name>
-                <Number>{response.number}</Number>
-                <DeleteBtn
-                  onClick={() => dispatch(deleteContacts(response.id))}
-                >
-                  <Icon size="19px" />
-                </DeleteBtn>
-              </Item>
-            </ListItem>
+            <Item key={id}>
+              <Name>{name} :</Name>
+              <Number>{number}</Number>
+              <DeleteBtn onClick={() => dispatch(deleteContacts(id))}>
+                <Icon size="19px" />
+              </DeleteBtn>
+            </Item>
           );
         })}
-    </List>
+      </List>
+    )
   );
 };
