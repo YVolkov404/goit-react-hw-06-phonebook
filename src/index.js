@@ -15,10 +15,10 @@ import { store, persistor } from 'rdx/store';
 **/
 
 const theme = {
-  main: '#422040',
-  second: '#bcd8c1',
-  third: '#e57a44',
-  hovAndFoc: '#e57a44',
+  main: '#1b1b1d',
+  second: '#FFECD6',
+  third: '#4CB9E7',
+  hovAndFoc: '#4CB9E7',
 };
 
 ReactDOM.createRoot(document.getElementById('root')).render(
